@@ -8,7 +8,6 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT'],
     credentials: true
 }))
-app.use(cors())
 app.use(express.json())
 app.use('/auth', adminRouter)
 

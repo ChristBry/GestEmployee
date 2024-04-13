@@ -10,3 +10,8 @@
     background-color: rgba(1, 32, 93, 0.6);
     color: white;
 }
+.link:hover {
+    background-color: white;
+    color: black;
+    border-radius: 50px;
+}
