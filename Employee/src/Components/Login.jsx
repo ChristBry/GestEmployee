@@ -8,7 +8,7 @@ const Login = () => {
         email: '',
         password:''
        })
-       const [error, setError] = useState(null)
+       const [error, setError] = useState()
        const navigate = useNavigate()
        axios.defaults.withCredentials = true;
        const handleSubmit = (event) => {
@@ -18,8 +18,8 @@ const Login = () => {
                 if(result.data.loginStatus) {
                     navigate('/dashboard')
                 } else {
-                    setError(result.data.Error)
-                } 
+                    setError(result.data.Error) 
+                }
             })
             .catch(err => console.log(err))
        }
