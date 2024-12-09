@@ -1,0 +1,86 @@
+import React from 'react'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import "bootstrap-icons/font/bootstrap-icons.css"
+import "./Style.css"
+import axios from 'axios'
+
+const Dashboard = () => {
+  const navigate = useNavigate()
+
+  axios.defaults.withCredentials = true
+  const handleLogout = () => {
+    axios.get('http://localhost:3000/auth/logout')
+      .then(result => {
+        if (result.data.Status) {
+          navigate('/')
+        } else {
+          alert(result.data.Error)
+        }
+      })
+  }
+  return (
+    <div className='container-fluid'>
+      <div className='row flex-nowrap'>
+        <div className='col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark'>
+          <div className='d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100'>
+            <Link to="/dashboard" className='d-flex align-items-center pb-3 mb-md-1 mt-md-m me-md-auto text-white text-decoration-none'>
+              <span className='fs-5 fw-bolder d-none d-sm-inline mt-2 mx-3'>IUC</span>
+            </Link>
+            <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+              <li className="w-100">
+                <Link to="/dashboard" className="nav-link text-white px-0 align-middle">
+                  <div className="link d-flex align-items-center">
+                    <i className="fs-4 bi-speedometer2 ms-2"></i>
+                    <span className="ms-2 d-none d-sm-inline">Tableau de bord</span>
+                  </div>
+                </Link>
+              </li>
+              <li className="w-100">
+                <Link to="/dashboard/employee" className="nav-link px-0 align-middle text-white">
+                  <div className='link d-flex align-items-center'>
+                    <i className="fs-4 bi-people ms-2"></i>
+                    <span className="ms-2 d-none d-sm-inline">
+                      Gestion des employés
+                    </span>
+                  </div>
+                </Link>
+              </li>
+              <li className="w-100">
+                <Link to="/dashboard/category" className="nav-link px-0 align-middle text-white">
+                  <div className="link d-flex align-items-center">
+                    <i className="fs-4 bi-columns ms-2"></i>
+                    <span className="ms-2 d-none d-sm-inline">Services</span>
+                  </div>
+                </Link>
+              </li>
+              <li className="w-100">
+                <Link to="/dashboard/profile" className="nav-link px-0 align-middle text-white">
+                  <div className="link d-flex align-items-center">
+                    <i className="fs-4 bi-person ms-2"></i>
+                    <span className="ms-2 d-none d-sm-inline">Profil</span>
+                  </div>
+                </Link>
+              </li>
+              <li className="w-100" onClick={handleLogout}>
+                <Link to="/" className="nav-link px-0 align-middle text-white">
+                  <div className="link d-flex align-items-center">
+                    <i className="fs-4 bi-power ms-2"></i>
+                    <span className="ms-2 d-none d-sm-inline">Déconnexion</span>
+                  </div>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className='col p-0 m-0'>
+          <div className='p-2 d-flex justify-content-center shadow'>
+            <h2 className='fs-4 pt-2 lead'>Système de Gestion des Employés</h2>
+          </div>
+          <Outlet />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Dashboard
