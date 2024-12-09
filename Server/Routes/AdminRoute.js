@@ -58,7 +58,10 @@ router.get('/category', (req, res) => {
             console.error("Query Error:", err);
             return res.status(500).json({ Status: false, Error: "Database Query Error" });
         }
-        return res.json({ Status: true, Result: result });
+        // Convertir les RowDataPacket en tableau JSON standard
+        const formattedResult = JSON.parse(JSON.stringify(result));
+
+        return res.json({ Status: true, Result: formattedResult });
     });
 });
 
@@ -151,7 +154,11 @@ router.get('/employee', (req, res) => {
             console.error("Query Error:", err);
             return res.status(500).json({ Status: false, Error: "Database Query Error" });
         }
-        return res.json({ Status: true, Result: result });
+
+        // Convertir les RowDataPacket en tableau JSON standard
+        const formattedResult = JSON.parse(JSON.stringify(result));
+
+        return res.json({ Status: true, Result: formattedResult });
     });
 });
 

@@ -50,7 +50,7 @@ const EmployeeLogin = () => {
                                 <label className='form-check-label'>Remember for 30 days</label>
                                 <Link className='mx-5 mt-1 forgot-password'>Forgot password ?</Link>
                             </div>
-                            <button type='submit' className='btn-valid mt-3 mx-5 p-2 w-75 rounded-2 mt-2'>Validate</button>
+                            <button type='submit' className='btn btn-success text-white mt-3 mx-5 p-2 w-75 rounded-2 mt-2'>Validate</button>
                         </form>
                     </div>
                 </div>

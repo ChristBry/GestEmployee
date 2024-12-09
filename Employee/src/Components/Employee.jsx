@@ -62,14 +62,14 @@ const Employee = () => {
             {
               employee.map(e => (
                 <tr className=''>
-                  <td>{e.name}</td>
-                  <td><img src={`http://localhost:3000/Images/` + e.image} className='employee_image w-25 h-25 ms-5'></img></td>
-                  <td>{e.email}</td>
-                  <td>{e.poste}</td>
-                  <td>{e.salary}</td>
-                  <td>{e.address}</td>
-                  <td>
-                    <Link to={`/dashboard/edit_employee/` + e.id} className='me-2'>Modifier</Link>
+                  <td className='pt-4'>{e.name}</td>
+                  <td><img src={`http://localhost:3000/Images/` + e.image} className='employee_image w-25 h-25'></img></td>
+                  <td className='pt-4'>{e.email}</td>
+                  <td className='pt-4'>{e.poste}</td>
+                  <td className='pt-4'>{e.salary}</td>
+                  <td className='pt-4'>{e.address}</td>
+                  <td className='pt-4'>
+                    <Link to={`/dashboard/edit_employee/` + e.id} className='me-2 pt-4'>Modifier</Link>
                     <button className='btn btn-danger btn-sm' onClick={() => popUpDelete(e.id)}><i class="bi bi-trash3"></i></button>
                   </td>
                 </tr>

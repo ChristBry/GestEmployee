@@ -10,39 +10,51 @@ const Home = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [user, setUser] = useState(null)
   const [employees, setEmployees] = useState([]);
+  const [services, setServices] = useState([]);
   const [groupedEmployees, setGroupedEmployees] = useState({});
 
-  // Fonction pour récupérer les employés depuis une API
+  // Regroupe les employés par service
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/auth/employee") // Remplacez par votre URL API
-      .then((result) => {
-        setEmployees(result);
-        groupByService(result);
-      })
-      .catch((error) => console.error("Erreur lors du chargement des employés :", error));
-  }, []);
+    const groupByService = () => {
+      const grouped = services.reduce((acc, service) => {
+        acc[service.id] = {
+          serviceName: service.name,
+          employees: employees.filter(emp => emp.category_id === service.id),
+        };
+        return acc;
+      }, {});
+      setGroupedEmployees(grouped);
+    };
 
-  // Fonction pour grouper les employés par service
-  const groupByService = (employeesList) => {
-    const grouped = employeesList.reduce((acc, employee) => {
-      const service = employee.service || "Non attribué";
-      if (!acc[service]) {
-        acc[service] = [];
-      }
-      acc[service].push(employee);
-      return acc;
-    }, {});
-    setGroupedEmployees(grouped);
-  };
-
+    groupByService();
+  }, [employees, services]);
 
   useEffect(() => {
     adminCount();
     employeeCount();
     salaryCount();
-    adminRecords()
+    adminRecords();
+    nbreEmployee();
+    nbreServices();
   }, [])
+
+  const nbreEmployee = () => {
+    axios.get('http://localhost:3000/auth/employee')
+      .then(result => {
+        if (result.data.Status) {
+          setEmployees(result.data.Result)
+        }
+      })
+  }
+
+  const nbreServices = () => {
+    axios.get('http://localhost:3000/auth/category')
+      .then(result => {
+        if (result.data.Status) {
+          setServices(result.data.Result)
+        }
+      })
+  }
 
   const adminRecords = () => {
     axios.get('http://localhost:3000/auth/admin_records')
@@ -162,20 +174,28 @@ const Home = () => {
         </table>
       </div>
       <div className="container px-5 pt-3">
-        <h3 className="my-4 fs-4 ms-3">Employés classés par service</h3>
-        {Object.keys(groupedEmployees).map((service) => (
-          <div key={service} className="mb-4">
-            <h4 className="text-primary">{service}</h4>
-            <ul className="list-group">
-              {groupedEmployees[service].map((employee) => (
-                <li key={employee.id} className="list-group-item">
-                  {employee.name} - {employee.position}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      <h3 className="m-0 pb-4">Liste des employés par services</h3>
+        {Object.keys(groupedEmployees).map(serviceId => {
+          const group = groupedEmployees[serviceId];
+          return (
+            <div key={serviceId} className="mb-4">
+              <h2 className='fs-4 mt-2 small'>{group.serviceName}</h2>
+              {group.employees.length > 0 ? (
+                <ul className="list-group w-50">
+                  {group.employees.map(employee => (
+                    <li key={employee.id} className="list-group-item">
+                      {employee.name} - {employee.poste}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>Aucun employé dans ce service.</p>
+              )}
+            </div>
+          );
+        })}
       </div>
+
       {isModalVisible && (
         <div className="modal d-block" tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
@@ -203,7 +223,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-      )}
+      )
+      }
     </div >
   )
 }

@@ -76,9 +76,13 @@ small {
 }
 
 .employee_image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    border-radius: 0%;
+    margin-left: 35%;
+}
+
+.employee-image {
+    width: 20%;
+    height: 40%;
 }
 
 .btn-valid {
