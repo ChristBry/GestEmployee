@@ -62,6 +62,12 @@ small {
 }
 .border-color {
     border: 1px solid var(--bg-principal);
+.loginPage{
+    background-image: url('../../public/Images/BgEmployee.png');
+    background: linear-gradient(rgba(11,11,11,0.7), rgba(10,10,10,0.7)), url('../../public/Images/BgEmployee.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 120%;
 }
 
 .loginForm {
@@ -160,4 +166,4 @@ small {
     text-align: center;
 }
 
-/* End Login page */
+}
