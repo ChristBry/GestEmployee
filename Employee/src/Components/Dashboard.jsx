@@ -24,7 +24,7 @@ const Dashboard = () => {
         <div className='col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark'>
           <div className='d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100'>
             <Link to="/dashboard" className='d-flex align-items-center pb-3 mb-md-1 mt-md-m me-md-auto text-white text-decoration-none'>
-              <span className='fs-5 fw-bolder d-none d-sm-inline mt-2 mx-3'>IUC</span>
+              <span className='fs-5 fw-bolder d-none d-sm-inline mt-2 mx-3'>AFRIJET</span>
             </Link>
             <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
               <li className="w-100">
@@ -41,6 +41,16 @@ const Dashboard = () => {
                     <i className="fs-4 bi-people ms-2"></i>
                     <span className="ms-2 d-none d-sm-inline">
                       Gestion des employés
+                    </span>
+                  </div>
+                </Link>
+              </li>
+              <li className="w-100">
+                <Link to="/dashboard/paiement" className="nav-link px-0 align-middle text-white">
+                  <div className='link d-flex align-items-center'>
+                    <i className="fs-4 bi-cash ms-2"></i>
+                    <span className="ms-2 d-none d-sm-inline">
+                      Gestion des paiements
                     </span>
                   </div>
                 </Link>

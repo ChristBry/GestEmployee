@@ -16,6 +16,8 @@ import EmployeeLogin from './Components/EmployeeLogin'
 import EmployeeDetail from './Components/EmployeeDetail'
 import AddAdmin from './Components/addAdmin'
 import EditAdmin from './Components/editAdmin'
+import GestSalaire from './Components/gestSalaire'
+import ExtraPayment from './Components/extraPayment'
 
 function App() {
 
@@ -31,6 +33,8 @@ function App() {
         <Route path='/dashboard/employee' element={<Employee />}></Route>
         <Route path='/dashboard/add_admin' element={<AddAdmin />}></Route>
         <Route path='/dashboard/edit_admin/:id' element={<EditAdmin />}></Route>
+        <Route path='/dashboard/paiement' element={<GestSalaire />}></Route>
+        <Route path='/dashboard/extra/:id' element={<ExtraPayment />}></Route>
         <Route path='/dashboard/category' element={<Category />}></Route>
         <Route path='/dashboard/profile' element={<Profile />}></Route>
         <Route path='/dashboard/add_category' element={<AddCategory />}></Route>
